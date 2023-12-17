@@ -32,4 +32,4 @@ jobs:
       # Corre la siguiente instrucción
       run:
         # Definir la variable de salida interna respuesta con el valor de MI_VARIABLE
-        echo "::set-output name=respuesta::${MI_VARIABLE}"
+        echo "name=${MI_VARIABLE}" >> $GITHUB_OUTPUT
