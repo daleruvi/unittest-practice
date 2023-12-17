@@ -1,0 +1,30 @@
+#Nombre del workflow
+name: Mi primer worklow
+
+# Desencadenante o trigger del workflow
+on:
+  # Se desencadena al momento de hacer un push
+  push:
+    # Rama en donde se espera que el evento ocurra
+    branches: [ main ]
+
+# Jobs dentro del workflow
+jobs:
+  # Definición del job
+  Mi-primer-job:
+    # NOmbre del job
+    name: Mi primer job
+    # SO donde se correrá GH actions
+    runs-on: ubuntu-latest
+    
+    # Pasos dentro del job
+    steps:
+    # Nombre del step
+    - name: Imprimir
+
+      # Aquí se pueden definir las variables del ambiente
+      env:
+        MI_VARIABLE: Hola mundo
+      # Corre la siguiente instrucción
+      run:
+        echo $MI_VARIABLE
