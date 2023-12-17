@@ -1,0 +1,48 @@
+# Workflow que corre las pruebas al hacer push y pull en nuestro repositorio
+name: Pruebas unitarias
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  job1:
+    name: Pruebas
+    runs-on: ubuntu-latest
+
+    steps:
+    # Obtener el código del repositorio. El flujo de trabajo se ejecutará en una máquina que descargará el código de nuestro repositorio. Para ello, utilizaremos la acción predefinida actions/checkout@v2.
+    - name: Checkout de repositorio
+      uses: actions/checkout@v2
+    # Configurar el entorno de Python. Instalaremos una versión básica de Python 3.7 utilizando la acción predefinida actions/setup-python@v2. Indicaremos la versión de Python que queremos utilizar mediante la instrucción with.
+    - name: Configuración de entorno de python
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7'
+    # Instala las libreías y dependencias necesarias en el proyecto
+    - name: Instalación de librerías y dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    # Ejecutar las pruebas. Una vez que el entorno de Python esté configurado, podremos ejecutar las pruebas unitarias utilizando la instrucción que queramos.
+    - name: Correr pruebas
+      id: correr-pruebas
+      run: python -m unittest -v tests/test_persona.py
+    # Validamos los resultados obtenidos, si las preubas son fallidas se imprime un mensaje de fracaso
+    - name: Validar resultado con errores
+      if: ${{ failure() }}
+      env:
+        MENSAJE_ERROR: Una o varias pruebas fallaron
+      run: echo "::set-output name=respuesta::${MENSAJE_ERROR}"
+    # Validamos los resultados obtenidos, si las preubas son exitosas se imprime un mensaje de éxito
+    - name: Validar resultado sin errores
+      if: ${{ success() }}
+      env:
+        MENSAJE_EXITO: Todas las pruebas fueron exitosas
+      run: echo "::set-output name=respuesta::${MENSAJE_EXITO}"
+    # Corre el cubrimiento de las pruebas de nuestro código y ver el reporte al final de hacer el push
+    - name: Cálculo de cubrimiento
+      id: cubrimiento
+      run: |
+          coverage run -m unittest tests/test_persona.py
+          coverage report -m

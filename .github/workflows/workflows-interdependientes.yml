@@ -1,5 +1,5 @@
 #Nombre del workflow
-name: Mi primer worklow
+name: Worklows interdependientes
 
 # Desencadenante o trigger del workflow
 on:
@@ -16,15 +16,20 @@ jobs:
     name: Mi primer job
     # SO donde se correrá GH actions
     runs-on: ubuntu-latest
-
+    # Outputs que tendrá el job
+    outputs:
+      # el job tendrá justamente un output de nombre salida, que para el paso Imprimir (al que hemos agregado el id imprimir) se llamará internamente respuesta.
+      salida: ${{ steps.imprimir.outputs.respuesta }}
     # Pasos dentro del job
     steps:
     # Nombre del step
     - name: Imprimir
-
+      # Id del step
+      id: imprimir
       # Aquí se pueden definir las variables del ambiente
       env:
         MI_VARIABLE: Hola mundo
       # Corre la siguiente instrucción
       run:
-        echo $MI_VARIABLE
+        # Definir la variable de salida interna respuesta con el valor de MI_VARIABLE
+        echo "::set-output name=respuesta::${MI_VARIABLE}"
