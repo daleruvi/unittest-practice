@@ -18,7 +18,7 @@ jobs:
     - name: Configuración de entorno de python
       uses: actions/setup-python@v2
       with:
-          python-version: '3.7'
+          python-version: 'latest'
     # Instala las libreías y dependencias necesarias en el proyecto
     - name: Instalación de librerías y dependencias
       run: |
