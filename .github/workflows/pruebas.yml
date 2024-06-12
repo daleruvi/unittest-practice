@@ -51,7 +51,7 @@ jobs:
           coverage lcov
 
     - name: Upload code coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage
-          path: coverage.lcov
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-coverage
+        path: coverage.lcov
