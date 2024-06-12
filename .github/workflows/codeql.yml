@@ -12,9 +12,11 @@
 name: "CodeQL"
 
 on:
-  workflow_run:
-    workflows: [Pruebas]
-    types: [completed]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    types: [opened, synchronize, reopened]  # Include events from forked PRs
   schedule:
     - cron: '36 9 * * 0'
 
