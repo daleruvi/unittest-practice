@@ -1,10 +1,12 @@
 # Workflow que corre las pruebas al hacer push y pull en nuestro repositorio
-name: Pruebas unitarias
+name: Pruebas
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened] # Trigger on PR events from forks
+  merge_group:
+    types: [checks_requested]  
 jobs:
   job1:
     name: Pruebas
@@ -46,3 +48,10 @@ jobs:
       run: |
           coverage run -m unittest tests/test_persona.py
           coverage report -m
+          coverage lcov
+
+    - name: Upload code coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage
+          path: coverage.lcov
