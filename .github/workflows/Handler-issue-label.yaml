@@ -32,13 +32,9 @@ jobs:
             LABEL_NAME=${BASH_REMATCH[1]}
 
             if [[ ${VAR_USERS_REVIEWERS,,} =~ ${USER_COMMENT,,} ]]; then
-            
-            # Verificar permisos del usuario
-            PERMISSIONS=$(gh api -X GET "repos/$REPO_OWNER/$REPO_NAME/collaborators/$COMMENT_AUTHOR/permission" | jq -r '.permission')
-            if [[ "$PERMISSIONS" == "admin" || "$PERMISSIONS" == "write" ]]; then
               echo "LABEL_NAME=$LABEL_NAME" >> $GITHUB_ENV
             else
-              echo "El usuario $COMMENT_AUTHOR no tiene permisos paraagregar etiquetas."
+              gh issue comment $ISSUE_NUMBER --body "El usuario $COMMENT_AUTHOR no tiene permisos paraagregar etiquetas."
               exit 1  # Detener el workflow si no hay permisos
             fi
           fi
