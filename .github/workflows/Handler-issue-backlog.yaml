@@ -31,14 +31,7 @@ jobs:
           if [[ "$COMMENT_BODY" =~ ^/add-backlog\ (.*)$ ]]; then
             COLUMN_NAME=${BASH_REMATCH[1]}
 
-            # Verificar permisos del usuario
-            PERMISSIONS=$(gh api -X GET "repos/$REPO_OWNER/$REPO_NAME/collaborators/$COMMENT_AUTHOR/permission" | jq -r '.permission')
-            if [[ "$PERMISSIONS" == "admin" || "$PERMISSIONS" == "write" ]]; then
-              echo "COLUMN_NAME=$COLUMN_NAME" >> $GITHUB_ENV
-            else
-              echo "El usuario $COMMENT_AUTHOR no tiene permisos para agregar issues al backlog."
-              exit 1
-            fi
+            echo "COLUMN_NAME=$COLUMN_NAME" >> $GITHUB_ENV
           fi
 
       - name: Obtener ID del proyecto y de la columna
