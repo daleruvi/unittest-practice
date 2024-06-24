@@ -34,8 +34,7 @@ jobs:
             if [[ ${VAR_USERS_REVIEWERS,,} =~ ${USER_COMMENT,,} ]]; then
               echo "LABEL_NAME=$LABEL_NAME" >> $GITHUB_ENV
             else
-              gh issue comment $ISSUE_NUMBER --body "El usuario $COMMENT_AUTHOR no tiene permisos paraagregar etiquetas."
-              exit 1  # Detener el workflow si no hay permisos
+              gh issue comment $ISSUE_NUMBER --body "El usuario $COMMENT_AUTHOR no tiene permisos para agregar etiquetas."
             fi
           fi
 
