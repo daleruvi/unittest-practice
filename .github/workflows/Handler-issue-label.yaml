@@ -42,4 +42,4 @@ jobs:
       - name: Agregar etiqueta
         if: env.LABEL_NAME != ''
         run: |
-          gh issue edit $ISSUE_URL --add-label $LABEL_NAME
+          echo "$LABEL_NAME"
