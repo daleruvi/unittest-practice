@@ -17,8 +17,7 @@ jobs:
 
       - name: Setup GH CLI
         uses: dev-hanz-ops/install-gh-cli-action@v0.1.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        
 
       - name: Extraer información y verificar permisos
         env:
