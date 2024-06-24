@@ -19,10 +19,7 @@ jobs:
       - name: Setup GH CLI
         uses: dev-hanz-ops/install-gh-cli-action@v0.1.0
         
-      - name: Generate a token of Github APP
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-
+      
       - name: Extraer información y verificar permisos
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
