@@ -17,8 +17,9 @@ jobs:
     # Configurar el entorno de Python. Instalaremos una versión básica de Python 3.7 utilizando la acción predefinida actions/setup-python@v2. Indicaremos la versión de Python que queremos utilizar mediante la instrucción with.
     - name: Configuración de entorno de python
       uses: actions/setup-python@v2
-      #with:
-          #python-version: '3.7'
+      with:
+          # Este campo es opcional
+          python-version: '3.x'
     # Instala las libreías y dependencias necesarias en el proyecto
     - name: Instalación de librerías y dependencias
       run: |
