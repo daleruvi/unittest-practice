@@ -22,8 +22,20 @@ jobs:
     - name: Imprimir
       # Aquí se pueden definir las variables del ambiente
       env:
-        MI_VARIABLE: Hola mundo
+        MI_VARIABLE_1: Hola mundo - Mi Primer Job
       # Corre la siguiente instrucción
       run:
-        echo $MI_VARIABLE
+        echo "$MI_VARIABLE - $VARIABLE_GLOBAL"
+
+  Mi-segundo-job:
+    name: Mi segundo job
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Imprimir
+      env:
+        MI_VARIABLE_2: Hola mundo - Mi Segundo Job
+      # Corre la siguiente instrucción
+      run:
+        echo "$MI_VARIABLE - $VARIABLE_GLOBAL"
 
