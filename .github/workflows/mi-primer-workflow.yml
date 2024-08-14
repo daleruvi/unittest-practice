@@ -25,7 +25,7 @@ jobs:
         MI_VARIABLE_1: Hola mundo - Mi Primer Job
       # Corre la siguiente instrucción
       run:
-        echo "$MI_VARIABLE - $VARIABLE_GLOBAL"
+        echo "$MI_VARIABLE_1 - $VARIABLE_GLOBAL"
 
   Mi-segundo-job:
     name: Mi segundo job
@@ -37,5 +37,5 @@ jobs:
         MI_VARIABLE_2: Hola mundo - Mi Segundo Job
       # Corre la siguiente instrucción
       run:
-        echo "$MI_VARIABLE - $VARIABLE_GLOBAL"
+        echo "$MI_VARIABLE_2 - $VARIABLE_GLOBAL"
 
