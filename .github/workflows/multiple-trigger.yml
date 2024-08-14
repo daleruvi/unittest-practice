@@ -4,7 +4,24 @@ env: # (Opcional) Permite definir variables de entorno a nivel de workflow.
   VARIABLE_GLOBAL: Bancolombia
 
 on: # Trigger del workflow
-  [push, pull_request] # Eventos que activan la ejecución del workflow
+  # La ejecución del workflow se activa cuando
+  # Se realiza un push en la rama main
+  push:
+    branches:
+      - main
+  # Se crea, se sincronizsa o se reabre un pull request
+  pull_request:
+    types: [opened, synchronize, reopened]
+  # Se abre o se etiqueta un issue.
+  issues:
+    types:
+      - opened
+      - labeled
+  # Se ejecuta manualmente
+  workflow_dispatch:
+  # Se programa su ejecución(Todos los días a las 10:15 p.m)
+  schedule:
+    - cron:  '15 22 * * *'
 
 # Agrupa los jobs dentro del workflow
 jobs:
