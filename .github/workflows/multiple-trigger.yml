@@ -1,4 +1,4 @@
-name: Mi primer worklow # Define el nombre del workflow
+name: Worklow Multiple Trigger # Define el nombre del workflow
 
 env: # (Opcional) Permite definir variables de entorno a nivel de workflow.
   VARIABLE_GLOBAL: Bancolombia
