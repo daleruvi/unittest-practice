@@ -1,30 +1,29 @@
-#Nombre del workflow
-name: Mi primer worklow
+name: Mi primer worklow # Define el nombre del workflow
 
-# Desencadenante o trigger del workflow
-on:
-  # Se desencadena al momento de hacer un push
-  push:
-    # Rama en donde se espera que el evento ocurra
-    branches: [ main ]
+env: # (Opcional) Permite definir variables de entorno a nivel de workflow.
+  VARIABLE_GLOBAL: Bancolombia
 
-# Jobs dentro del workflow
+on: # Trigger del workflow
+  [push, pull_request] # Eventos que activan la ejecución del workflow
+
+# Agrupa los jobs dentro del workflow
 jobs:
-  # Definición del job
+
+  # ID del job
   Mi-primer-job:
-    # NOmbre del job
+    # Nombre del job
     name: Mi primer job
     # SO donde se correrá GH actions
     runs-on: ubuntu-latest
 
-    # Pasos dentro del job
+    # Agrupa los pasos dentro del job
     steps:
     # Nombre del step
     - name: Imprimir
-
       # Aquí se pueden definir las variables del ambiente
       env:
         MI_VARIABLE: Hola mundo
       # Corre la siguiente instrucción
       run:
         echo $MI_VARIABLE
+
