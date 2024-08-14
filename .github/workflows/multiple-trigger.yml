@@ -27,6 +27,8 @@ on: # Trigger del workflow
 jobs:
   # ID del job
   Mi-primer-job:
+    # Condición que ejecuta el job si el evento trigger no es manual
+    if: ${{ github.event_name != 'workflow_dispatch' }}
     # Nombre del job
     name: Mi primer job
     # SO donde se correrá GH actions
@@ -38,17 +40,18 @@ jobs:
       - name: Imprimir
         # Aquí se pueden definir las variables del ambiente
         env:
-          MI_VARIABLE_1: Hola mundo - Mi Primer Job
+          MI_VARIABLE_1: Hola mundo - Mi Primer Job - Trigger no es manual
         # Corre la siguiente instrucción
         run: echo "$MI_VARIABLE_1 - $VARIABLE_GLOBAL"
 
   Mi-segundo-job:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     name: Mi segundo job
     runs-on: ubuntu-latest
 
     steps:
       - name: Imprimir
         env:
-          MI_VARIABLE_2: Hola mundo - Mi Segundo Job
-        # Corre la siguiente instrucción
+          MI_VARIABLE_2: Hola mundo - Mi Segundo Job - Trigger manual
         run: echo "$MI_VARIABLE_2 - $VARIABLE_GLOBAL"
+
