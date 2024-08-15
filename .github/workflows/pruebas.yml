@@ -50,9 +50,17 @@ jobs:
           coverage run -m unittest tests/test_persona.py
           coverage report -m
           coverage lcov
-
+      # Carga el archivo de covertura a GH Artifacts
       - name: Upload code coverage
         uses: actions/upload-artifact@v4
         with:
+          # Nombre del artefacto
           name: code-coverage
+          # Ruta del archivo que vamos a subir
           path: coverage.lcov
+          # Comportamiento si no encuentra el archivo
+          if-no-files-found: 'warn' # Opcional
+          # Camtidad de días que permanecerá subido el artefacto
+          retention-days: 10 # Opcional
+          # Ruta donde empieza a buscar el archivo
+          working-directory: './' # Opcional
