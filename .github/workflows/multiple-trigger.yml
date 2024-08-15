@@ -6,7 +6,7 @@ env: # (Opcional) Permite definir variables de entorno a nivel de workflow.
 on: # Trigger del workflow
   # La ejecución del workflow se activa cuando
   # Se realiza un push en la rama main
-  push:
+  push: 
     branches:
       - main
   # Se crea, se sincronizsa o se reabre un pull request
