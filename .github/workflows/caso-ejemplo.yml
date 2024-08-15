@@ -1,0 +1,27 @@
+name: Workflow ejemplo para alineación GHActions # Define el nombre del workflow
+
+env: # (Opcional) Permite definir variables de entorno a nivel de workflow.
+  VARIABLE_GLOBAL: Bancolombia
+
+on: # Trigger del workflow
+  [push, pull_request] # Eventos que activan la ejecución del workflow
+
+
+  # Agrupa los jobs dentro del workflow
+jobs:
+  # ID del job
+  Mi-primer-job:
+    # Nombre del job
+    name: Mi primer job
+    # SO donde se correrá GH actions
+    runs-on: ubuntu-latest
+
+    # Agrupa los pasos dentro del job
+    steps:
+      # Nombre del step
+      - name: Imprimir
+        # Aquí se pueden definir las variables del ambiente
+        env:
+          MI_VARIABLE_1: Hola mundo - Mi Primer Job
+        # Corre la siguiente instrucción
+        run: echo "$MI_VARIABLE_1 - $VARIABLE_GLOBAL"

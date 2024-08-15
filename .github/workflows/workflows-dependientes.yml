@@ -1,0 +1,35 @@
+name: Mi primer worklow # Define el nombre del workflow
+
+on: # Trigger del workflow
+  [push, pull_request] # Eventos que activan la ejecución del workflow
+
+# Agrupa los jobs dentro del workflow
+jobs:
+  # ID del job
+  Mi-primer-job:
+    # Nombre del job
+    name: Mi primer job
+    # SO donde se correrá GH actions
+    runs-on: ubuntu-latest
+
+    # Agrupa los pasos dentro del job
+    steps:
+      # Nombre del step
+      - name: Imprimir
+        # Aquí se pueden definir las variables del ambiente
+        env:
+          MI_VARIABLE_1: Hola mundo - Mi Primer Job
+        # Corre la siguiente instrucción
+        run: echo "$MI_VARIABLE_1"
+
+  Mi-segundo-job:
+    needs: Mi-primer-job
+    name: Mi segundo job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Imprimir
+        env:
+          MI_VARIABLE_2: Hola mundo - Mi Segundo Job
+        # Corre la siguiente instrucción
+        run: echo "$MI_VARIABLE_2"

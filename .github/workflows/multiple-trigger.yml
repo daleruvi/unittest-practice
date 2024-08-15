@@ -19,6 +19,16 @@ on: # Trigger del workflow
       - labeled
   # Se ejecuta manualmente
   workflow_dispatch:
+    inputs:
+      notificacion:
+          description: 'Notificación nivel'
+          required: true
+          default: '2'
+          type: choice
+          options:
+          - 0
+          - 1
+          - 2
   # Se programa su ejecución(Todos los días a las 10:15 p.m)
   schedule:
     - cron:  '15 22 * * *'
