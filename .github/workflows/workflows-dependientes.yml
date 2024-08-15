@@ -1,4 +1,4 @@
-name: Mi primer worklow # Define el nombre del workflow
+name: Worklow con jobs interdependientes # Define el nombre del workflow
 
 on: # Trigger del workflow
   [push, pull_request] # Eventos que activan la ejecución del workflow
@@ -11,16 +11,24 @@ jobs:
     name: Mi primer job
     # SO donde se correrá GH actions
     runs-on: ubuntu-latest
-
+    # Agrupa los outputs del job
+    outputs:
+      # Define el output con id salida (Uso del contexto steps)
+      salida: ${{ steps.imprimir.outputs.respuesta }}
     # Agrupa los pasos dentro del job
     steps:
       # Nombre del step
       - name: Imprimir
+        id: imprimir
         # Aquí se pueden definir las variables del ambiente
         env:
           MI_VARIABLE_1: Hola mundo - Mi Primer Job
         # Corre la siguiente instrucción
-        run: echo "$MI_VARIABLE_1"
+        run: |
+          # Imprime la variable
+          echo "$MI_VARIABLE_1"
+          # Define la variable como output
+          echo "respuesta=${MI_VARIABLE_1}" >> $GITHUB_OUTPUT
 
   Mi-segundo-job:
     needs: Mi-primer-job
@@ -29,7 +37,5 @@ jobs:
 
     steps:
       - name: Imprimir
-        env:
-          MI_VARIABLE_2: Hola mundo - Mi Segundo Job
-        # Corre la siguiente instrucción
-        run: echo "$MI_VARIABLE_2"
+        # Corre la siguiente instrucción (Uso del contexto needs)
+        run: echo ${{needs.Mi-primer-job.outputs.salida}}

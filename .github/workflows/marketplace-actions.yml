@@ -1,0 +1,28 @@
+# Workflow que corre las pruebas al hacer push y pull en nuestro repositorio
+name: Pruebas
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened] # Trigger on PR events from forks
+  merge_group:
+    types: [checks_requested]
+jobs:
+  job1:
+    name: Pruebas
+    runs-on: ubuntu-latest
+
+    steps:
+      # Obtener el código del repositorio. El flujo de trabajo se ejecutará en una máquina que descargará el código de nuestro repositorio.
+      # Para ello, utilizaremos la acción predefinida actions/checkout@v4.
+      - name: Checkout de repositorio
+        uses: actions/checkout@v4
+      # Configurar el entorno de Python. Instalaremos una versión básica de Python 3 utilizando la acción predefinida actions/setup-python@v5.1.1.
+      # Indicaremos la versión de Python que queremos utilizar mediante la instrucción with.
+      - name: Configuración de entorno de python
+        uses: actions/setup-python@v5.1.1
+        with:
+          # Este campo es opcional
+          python-version: "3.x"
+      - name: Ejecutar script
+        run: python my_script.py

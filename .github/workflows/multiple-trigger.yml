@@ -6,7 +6,7 @@ env: # (Opcional) Permite definir variables de entorno a nivel de workflow.
 on: # Trigger del workflow
   # La ejecución del workflow se activa cuando
   # Se realiza un push en la rama main
-  push: 
+  push:
     branches:
       - main
   # Se crea, se sincronizsa o se reabre un pull request
@@ -19,19 +19,21 @@ on: # Trigger del workflow
       - labeled
   # Se ejecuta manualmente
   workflow_dispatch:
+    # Agrupa los inputs para la ejecución manual
     inputs:
-      notificacion:
-          description: 'Notificación nivel'
-          required: true
-          default: '2'
-          type: choice
-          options:
+      # Define el input notificacion
+      notificacion: # Nombre input
+        description: "Notificación nivel"
+        required: true
+        default: "2"
+        type: choice
+        options:
           - 0
           - 1
           - 2
   # Se programa su ejecución(Todos los días a las 10:15 p.m)
   schedule:
-    - cron:  '15 22 * * *'
+    - cron: "15 22 * * *"
 
 # Agrupa los jobs dentro del workflow
 jobs:
@@ -64,4 +66,3 @@ jobs:
         env:
           MI_VARIABLE_2: Hola mundo - Mi Segundo Job - Trigger manual
         run: echo "$MI_VARIABLE_2 - $VARIABLE_GLOBAL"
-
