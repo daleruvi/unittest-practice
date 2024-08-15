@@ -1,5 +1,5 @@
 # Workflow que corre las pruebas al hacer push y pull en nuestro repositorio
-name: Pruebas
+name: Workflow que usa actions del marketplace
 on:
   push:
     branches: [main]

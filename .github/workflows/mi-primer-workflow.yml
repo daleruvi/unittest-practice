@@ -23,7 +23,7 @@ jobs:
         env:
           MI_VARIABLE_1: Hola mundo - Mi Primer Job
         # Corre la siguiente instrucción
-        run: echo "$MI_VARIABLE_1 - $VARIABLE_GLOBAL"
+        run: echo "$MI_VARIABLE_1 - $VARIABLE_GLOBAL_INEXISTENTE"
 
   Mi-segundo-job:
     name: Mi segundo job
